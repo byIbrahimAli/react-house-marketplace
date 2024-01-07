@@ -744,6 +744,7 @@ button {
 
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .formInput,
