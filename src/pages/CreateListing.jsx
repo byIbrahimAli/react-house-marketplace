@@ -75,15 +75,7 @@ function CreateListing() {
     e.preventDefault()
     setLoading(true)
 
-    if (discountedPrice > maxSellLimit || regularPrice > maxSellLimit) {
-      setLoading(false)
-      toast.error(
-        'Bloody hell greedy, chill out. We only allow a max price of £750,000,000'
-      )
-      return
-    }
-
-    if (discountedPrice > regularPrice) {
+    if (+discountedPrice > +regularPrice) {
       setLoading(false)
       toast.error('Discounted price needs to be less than regular price')
       return
