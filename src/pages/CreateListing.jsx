@@ -52,6 +52,8 @@ function CreateListing() {
   const navigate = useNavigate()
   const isMounted = useRef(true)
 
+  const maxSellLimit = 750000000
+
   useEffect(() => {
     if (isMounted) {
       onAuthStateChanged(auth, (user) => {
@@ -72,6 +74,14 @@ function CreateListing() {
   const onSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
+
+    if (discountedPrice > maxSellLimit || regularPrice > maxSellLimit) {
+      setLoading(false)
+      toast.error(
+        'Bloody hell greedy, chill out. We only allow a max price of £750,000,000'
+      )
+      return
+    }
 
     if (discountedPrice > regularPrice) {
       setLoading(false)
@@ -405,7 +415,7 @@ function CreateListing() {
               value={regularPrice}
               onChange={onMutate}
               min='50'
-              max='750000000'
+              max={maxSellLimit}
               required
             />
             {type === 'rent' && <p className='formPriceText'>$ / Month</p>}
@@ -421,7 +431,7 @@ function CreateListing() {
                 value={discountedPrice}
                 onChange={onMutate}
                 min='50'
-                max='750000000'
+                max={maxSellLimit}
                 required={offer}
               />
             </>
