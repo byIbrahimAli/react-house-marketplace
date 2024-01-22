@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../components/Spinner'
 
 function EditListing() {
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true)
   const [loading, setLoading] = useState(false)
   const [listing, setListing] = useState(false)
@@ -62,7 +63,7 @@ function EditListing() {
       toast.error('You cannot edit this listing')
       navigate('/')
     }
-  }, [])
+  }, [auth.currentUser.uid, listing, navigate])
 
   // fetch listing to edit
   useEffect(() => {
@@ -82,14 +83,16 @@ function EditListing() {
     }
 
     fetchListing()
-  }, [params.listing, navigate])
+  }, [params.listingId, navigate])
 
   // sets userref to logged in user
   useEffect(() => {
-    if (isMounted) {
-      onAuthStateChanged(auth, (user) => {
+    let unsubscribe
+
+    if (isMounted.current) {
+      unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-          setFormData({ ...formData, userRef: user.uid })
+          setFormData((formData) => ({ ...formData, userRef: user.uid }))
         } else {
           navigate('/sign-in')
         }
@@ -98,9 +101,11 @@ function EditListing() {
 
     // memory leak, see other comment for full link
     return () => {
-      isMounted.current = false
+      if (unsubscribe) {
+        unsubscribe()
+      }
     }
-  }, [isMounted])
+  }, [auth, navigate])
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -176,6 +181,8 @@ function EditListing() {
                 break
               case 'running':
                 console.log('Upload is running')
+                break
+              default:
                 break
             }
           },
