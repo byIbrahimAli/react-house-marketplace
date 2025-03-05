@@ -1,3 +1,34 @@
+# Summary
+Simple housing react app.
+
+**Core React Concepts:**
+
+- JSX: The App.js and index.js files use JSX to define the structure of the React components.
+- Functional Components: The App.js defines a functional component named App.
+- React Router: The App.js file uses react-router-dom for client-side routing (BrowserRouter, Routes, Route).
+- React Hooks: Though not explicitly visible in the provided files, common React hooks (useState, useEffect) are likely used in other components/pages.
+- Context API: Not visible in the provided files but might be used elsewhere in the project for state management.
+- React Strict Mode: Used in index.js to highlight potential problems in an application.
+
+**Additional Libraries and Tools:**
+
+- React Toastify: For notifications (ToastContainer).
+- Firebase: Integrated for backend services.
+- React Leaflet: For interactive maps.
+- Swiper: Likely used for carousels/sliders.
+- UUID: For generating unique identifiers.
+- Testing Libraries: @testing-library/react, @testing-library/jest-dom, @testing-library/user-event.
+
+**Project Configuration:**
+
+- Package Management: Dependencies are managed using package.json.
+- Build and Start Scripts: Scripts for starting, building, testing, and ejecting the app using react-scripts.
+
+**Video demo**
+https://github.com/user-attachments/assets/17b9c656-07c5-4991-976a-a417d6843ce1
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
